@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Mis Productos</title>
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #d3d3d3;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+
+    .table {
+      background-color: #fff;
+    }
+
+    .aux {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'">
+    <nav>
+      <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+      <div class="cierre">
+        <a th:href="@{/logout}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    <div class="row">
+      <h1 class="mt-4 mb-3">
+        Productos en venta:
+      </h1>
+    </div>
+    <h2></h2>
+    <div class="container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Eliminar </th>
+            <th scope="col">Editar </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="producto:${misproductos}">
+            <td th:text="${producto.nombre}"></td>
+            <td th:text="${producto.descripcion}"></td>
+            <td th:text="${producto.precio}+ ' €'"></td>
+            <td th:text="${producto.stock}"></td>
+            <td><a class="btn btn-danger" th:href="@{/misproductos/borrarProducto/{id} (id=${producto.id})}">Delete</a>
+            </td>
+            <td><a class="btn btn-info" th:href="@{/misproductos/editarProducto/{id} (id=${producto.id})}">Editar</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span></span>
+      <div class="row">
+        <a class="btn btn-info" th:href="@{/misproductos/nuevoProducto}"> Nuevo producto</a>
+        <div class="aux"></div>
+        <a class="btn btn-info" th:href="@{/misproductos/pedidos}"> Pedidos pendientes</a>
+        <div class="aux"></div>
+        <a class="btn btn-info" th:href="@{/misproductos/pedidos/confirmado}"> Pedidos confirmado</a>
+        <div class="aux"></div>
+        <a class="btn btn-info" th:href="@{/misproductos/pedidosterminado}"> Pedidos completados</a>
+      </div>
+    </div>
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

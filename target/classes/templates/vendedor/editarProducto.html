@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>BarrioCovid</title>
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'">
+      <nav>
+        <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+        <div class="cierre">
+          <a th:href="@{/logout}">Cerrar sesión</a>
+        </div>
+      </nav>
+    </header>
+    <div class="">
+      <h2>Actualizar el producto</h2>
+      <form class="form-horizontal" th:action="@{/misproductos/productoEditado}"  method="post"  enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${producto.id}">    
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nombre">Nuevo nombre:</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control input-md" id="nombre" name="nombre" placeholder="Nuevo nombre del producto" required autocomplete="off" th:value="${producto.nombre}">
+            <div id="prueba"></div>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="descripcion" >Descripción:</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control input-md" id="descripcion" name="descripcion" placeholder="descripción" th:value="${producto.descripcion}" required autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="cantidad">Nuevo stock:</label>
+          <div class="col-md-4">
+            <input type="number" class="form-control input-md" id="cantidad" name="stock" placeholder="Nuevo stock del producto" th:value="${producto.stock}" required autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="precio">Nuevo Precio:</label>
+          <div class="col-md-4">
+            <input type="number" class="form-control input-md" step="any"  id="precio" name="precio" placeholder="Nuevo precio del producto" th:value="${producto.precio}" required autocomplete="off">
+          </div>
+        </div>
+        <center>
+          <div class="row" style="display: flex; justify-content: center;">
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-info"> Guardar </button>
+            </div>             
+        </div>
+        </center>
+      </form>
+    </div>
+  </center>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

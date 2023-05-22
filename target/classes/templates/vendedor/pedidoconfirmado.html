@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+</html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mi pedido</title>
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-color: #fff;
+            padding: 10px;
+            color: #000;
+            z-index: 1;
+            margin: 0;
+            box-sizing: border-box;
+            text-align: center
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        header img {
+            width: 75px;
+            height: 100%;
+            margin-left: 20px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        .cierre {
+            margin-right: 30px
+        }
+
+        body {
+            background-color: #d3d3d3;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .contenedor-tabla {
+            margin-top: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .table {
+            background-color: #fff;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+        }
+
+        .btn-info a {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header th:fragment="encabezado" class="encabezado-principal">
+        <nav>
+            <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación">
+            <div class="btn btn-info">
+                <a th:href="@{/misproductos}">
+                    Volver
+                </a>
+            </div>
+        </nav>
+        <h1>Pedidos confirmado</h1>
+    </header>
+
+    <div class="contenedor-tabla">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Pedido Id</th>
+                    <th scope="col">Detalles del pedido</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Pedido entregado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido: ${pedidos}">
+                    <td th:text="${pedido.getId()}"></td>
+                    <td th:text="${pedido.toString()}"></td>
+                    <td th:text="${pedido.getTicket()}"></td>
+                    <td th:text="${pedido.getEstado()}"></td>
+                    <td th:text="${pedido.getUsuario().getNombre()}"></td>
+                    <td th:text="${pedido.getUsuario().getDireccion()}"></td>
+                    <td><a th:href="@{/misproductos/pedidosterminad/{id} (id=${pedido.getId()})}"
+                        class="btn btn-success"><span class="fas fa-check"></span></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</body>
+
+</html>

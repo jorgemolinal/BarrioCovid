@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Barrio Covid</title>
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    main {
+      margin-top: 120px;
+    }
+
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 100px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #d3d3d3;
+      max-height: 100px;
+      position: relative;
+      align-items: center;
+
+    }
+
+
+    .row {
+      max-height: 700px;
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+
+    .card {
+      width: 300px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+      background-color: #fff;
+      max-height: 400px;
+      margin-bottom: 30px;
+      margin-left: 170px;
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-body p {
+      color: black;
+      text-align: left;
+      margin: 0;
+      display: flex;
+    }
+
+    .container h1 {
+      text-align: center;
+      font-size: 4em;
+      margin-top: -20px;
+      margin-bottom: 2em;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .product-name {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .product-price {
+      font-size: 1;
+      margin-top: 1em;
+    }
+
+    .product-quantity {
+      margin-top: 1em;
+    }
+
+    .product-quantity2 {
+      float: left;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+
+    .col-lg-3 {
+      margin-right: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'">
+    <nav>
+      <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+      <div class="cierre">
+        <a class="btn btn-info" th:href="@{/verCarrito}">
+          Carrito
+        </a>
+        <a class="btn btn-info" th:href="@{/comprador/pedido}">
+          Pedido
+        </a>
+        <a th:href="@{/logout}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 class="display-3"><b>Productos disponibles:</b></h1>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 col-md-6 mb-4 my-3" th:each="producto: ${productos}">
+      <form th:action="@{/carrito}" method="POST">
+        <input type="hidden" th:value="${producto.id}" name="id">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="product-name" th:text="${producto.nombre}"></h5>
+            <p class="card-text" th:text="${producto.descripcion}"></p>
+            <p class="product-price" th:text="'Precio: ' + ${producto.precio}"></p>
+            <p class="product-quantity" th:text="'Stock: ' + ${producto.stock}"></p>
+            <div class="product-quantity2">
+              <label for="cantidad">Cantidad:</label>
+              <input class="card-text" type="number" id="cantidad" name="cantidad" autocomplete="off" min="1"
+                th:max="${producto.stock}" value="1">
+            </div>
+
+            <div>
+              <form th:action="@{/carrito}" method="POST">
+                <input type="hidden" th:value="${producto.id}" name="idproducto">
+                <button type="submit" class="btn btn-info">Añadir</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    </form>
+
+  </div>
+
+
+
+
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+
+</body>
+
+</html>

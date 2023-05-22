@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Selecciona tu tienda</title>
+  <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin-top: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #d3d3d3;
+    }
+
+    .card {
+      width: 500px;
+      height: 500px;
+      margin: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+      background-color: #fff;
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center;
+
+    }
+
+    .card-body p {
+      color: black;
+      text-align: left;
+    }
+
+    .card-footer {
+      background-color: #f5f5f5;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .container h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+  </style>
+</head>
+<body>
+  <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'">
+    <nav>
+      <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+      <div class="cierre">
+        <a th:href="@{/logout}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <div class="container my-5">
+    <div class="row text-center">
+     <div  th:if="${message != null}" class="col col-lg-12 alert alert-success">
+        <p th:text="${message}"></p>
+      </div>
+
+       <h1 class="display-3"><b>Selecciona tu tienda:</b></h1>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4" th:each="vendedor, iter : ${vendedores}">
+        <div class="card h-100 text-white d-flex flex-column" style="background-color: white;">
+          <img class="card-img-top" th:src="@{/img/grocery.jpg}" alt="Imagen de la tienda">
+          <div class="card-body">
+            <p class="card-text font-weight-bold text-decoration-underline">Nombre: <span
+                th:text="${vendedor.nombre}"></span></p>
+            <p class="card-text font-weight-bold text-decoration-underline">Dirección: <span
+                th:text="${vendedor.direccion}"></span></p>
+          </div>
+          <div class="card-footer text-left">
+            <a class="btn btn-info"
+              th:href="@{/comprador/{idcomprador}/tienda/{id}(idcomprador=${idcomprador}, id=${vendedor.id})}">
+              Seleccionar tienda
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

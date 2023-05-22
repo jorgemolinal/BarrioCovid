@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Crear Producto</title>
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'">
+      <nav>
+        <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+        <div class="cierre">
+          <a th:href="@{/logout}">Cerrar sesión</a>
+        </div>
+      </nav>
+    </header>
+    <div class="">
+      <h2>Nuevo Producto</h2>
+      <form class="form-horizontal" th:action="@{/misproductos/productoGuardado}" method="post"
+        enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nombre">Nombre:</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control input-md" id="nombre" name="nombre"
+              placeholder="Ingrese el nombre del producto" autocomplete="off" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="nombre">Descripción:</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control input-md" id="descripcion" name="descripcion"
+              placeholder="Ingrese la descripción del producto" autocomplete="off" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="cantidad">Stock:</label>
+          <div class="col-md-4">
+            <input type="number" class="form-control input-md" id="cantidad" name="stock"
+              placeholder="Ingrese el stock del producto" required autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="precio">Precio:</label>
+          <div class="col-md-4">
+            <input type="number" class="form-control input-md" step="any" id="precio" name="precio"
+              placeholder="Ingrese el precio del producto" autocomplete="off" required>
+          </div>
+        </div>
+        <div class="row" style="display: flex; justify-content: center;">
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-info">
+              <span class="glyphicon glyphicon-saved"></span> Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </center>
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

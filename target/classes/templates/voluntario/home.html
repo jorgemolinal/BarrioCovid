@@ -1,0 +1,128 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pedidos voluntario</title>
+  <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      background-color: #fff;
+      padding: 10px;
+      color: #000;
+    }
+
+    nav img {
+      width: 75x;
+      height: 100px;
+      margin-left: 20px;
+    }
+
+    .cierre {
+      margin-right: 30px
+    }
+
+    body {
+      background-color: #d3d3d3;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #d3d3d3;
+      padding: auto;
+    }
+
+    .table {
+      background-color: #fff;
+    }
+
+
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+
+    .btn-info a {
+      color: white;
+    }
+
+  </style>
+</head>
+
+
+
+<body>
+
+  <header th:fragment="encabezado" th:style="'background-color: #d3d3d3;'" >
+    <nav>
+      <img th:src="@{/img/logoPNG.png}" alt="Logo de la aplicación" style="float:right">
+      <div class="cierre">
+        <a th:href="@{/logout}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+            
+    <div class="row justify-content-center my-4">
+      <div class="col">
+
+
+        <div class="pedidosContainer">
+          <div th:if="${pedidos.isEmpty()}">
+            <p>No hay pedidos para mostrar</p>
+         </div>
+
+         <div th:if="${not pedidos.isEmpty()}"></div>
+          <table class="table">
+              <thead>
+                <tr><h3>Todos los pedidos</h3></tr>
+                  <tr>
+                      <th scope="col">Detalles del pedido</th>
+                      <th scope="col">Nombre comprador</th>
+                      <th scope="col">Dirección comprador</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Ticket</th>
+                      <th scope="col">Aceptar</th>
+                      <th scope="col">Rechazar</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <th:block th:each="pedido : ${pedidos}"> 
+                  <tr>
+                      <td th:text="${pedido.toString()}"></td>
+                    <td th:text="${pedido.usuario.nombre}"></td>
+                    <td th:text="${pedido.usuario.direccion}"></td>
+                    <td th:text="${pedido.estado}"></td>
+                    <td th:text="${pedido.ticket}"></td>
+                      <td><a th:href="@{/voluntario/{id}/pedidoAceptado (id=${pedido.getId()})}" class="btn btn-success"><span
+                              class="fas fa-check"></span> </span></a></td>
+                      <td><a th:href="@{/voluntario/{id}/pedidoDenegado (id=${pedido.getId()})}" class="btn btn-danger"><span
+                              class="fas fa-check"></span></a></td>
+                    
+                  </tr>
+                </th:block>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      
+
+      </div>
+      <div class="col">
+          <a th:href="@{/voluntario/{idvoluntario}/pedidosconfirmados (idvoluntario=${voluntario})}" class="btn btn-info">Pedidos confirmados</a>
+          <a th:href="@{/voluntario/{idvoluntario}/pedidosdenegado (idvoluntario=${voluntario})}" class="btn btn-info">Pedidos denegados</a>
+      </div>
+</div>
+
+</body>
+
+</html>
