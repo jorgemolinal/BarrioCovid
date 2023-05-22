@@ -13,3 +13,11 @@ Está formada por un frontend y un backend. Para ello se ha utilizado Java Sprin
 en el fichero application.properties: _jdbc:h2:mem:testdb_
 
 ## Algunas imagenes de la aplicación
+![Login](screenshots/login.png)
+![Seleccionar tienda](screenshots/tienda.png)
+![Añadir productos](screenshots/productos.png)
+![Carrito](screenshots/carrito.png)
+![Productos que ofrece el vendedor](screenshots/vendedor.png)
+![Pedidos que realizan a un vendedor](screenshots/pedidos.png)
+![Pedidos confirmados](screenshots/pedidos.png)
+![Pedido realizado y finalizado](screenshots/fin.png)
